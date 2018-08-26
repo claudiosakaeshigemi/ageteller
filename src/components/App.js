@@ -2,19 +2,25 @@ import React , {Component} from 'react';
 import {Form,  FormControl,Button} from 'react-bootstrap';
 import './App.css';
 import AgeStats from './ageStats';
+
 class App extends Component{ 
 
     constructor() {
         super ();
         this.state = {
             newDate: '',
-            bithday: '1900-01-01'
+            birthday: '1900-01-01',
+            showStats: false
         }
     }
 
     changeBirthday() {
         console.log(this.state);
-        this.setState({bithday:this.state.newDate});
+        this.setState({
+            birthday:this.state.newDate,
+            showStats: true
+        
+        });
     }
 
 
@@ -33,10 +39,24 @@ class App extends Component{
                     </FormControl>
                     {' '}
                     <Button onClick ={
-                        () => this.changeBirthday() }
-                    > Submit </Button>
+                        () => this.changeBirthday() } > 
+                        Submit 
+                    </Button>
+
+                    {
+                        this.state.showStats ? 
+                        <div className="fade age-stats">
+                            <AgeStats date={this.state.birthday}/> 
+                        </div>
+                           
+                        :
+                        
+                        <div>
+
+                        </div>
+                    }
                 </Form>  
-                <AgeStats date={this.state.bithday}/>            
+                        
             </div>
         );
     }
